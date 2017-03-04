@@ -57,24 +57,29 @@ void GenerateMap( Vector<string> &lines , int N , Map<Vector<string>,Vector<stri
     len = lines.size() ;
     int i = 0 ;
     int j ;
-    while ( i < len - N  ){
+    while ( i < len  ){
     
         Vector<string> key ; 
 
         int end ;
 
-        if ((i+N) > len - 1 )
-            end = len - 1 ;
-        else
+        if ( i + N < len ){
             end = i + N ;
-
-        for( j = i ; ; j++ ){
-
-            if ( j >= end )
-                break ;
+            for( j = i ; j < end ; j++ ){
             key.add(lines[j]) ;
-
+            }
         }
+
+        else {
+                end = ( i + N ) % len ;
+                for ( j = i ; j < len ; j++){
+                    key.add(lines[j]) ;
+                }
+
+                for ( j = 0 ; j < end ; j++) {
+                    key.add(lines[j]) ;
+                }
+            }
 
         string rela ;
         rela = lines.get(end) ;
@@ -133,6 +138,12 @@ int main() {
     cin >> N ;
     GenerateMap(lines,N-1,map ,keys) ;
 
+   /* cout << "__" << endl ;
+    for ( int i = 0 ; i < keys.size() ; i++ ){
+        cout << keys[i] << endl ;
+    }
+    */
+
 
     while( true ){
     
@@ -158,9 +169,10 @@ int main() {
         GenerateRandom(inital,map,res,number  ) ;
         cout << "..."  ;
         for (  int i = 0 ; i < res.size() ; i++  )
-            cout << res[i] << " " ;
+           cout << res[i] << " " ;
         cout << "..." << endl ;
     }
+
 
     return 0;
 }
