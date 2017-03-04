@@ -131,7 +131,7 @@ int main() {
     int N ;
     cout << "Value of N ?" << endl ;
     cin >> N ;
-    GenerateMap(lines,N,map ,keys) ;
+    GenerateMap(lines,N-1,map ,keys) ;
 
 
     while( true ){
@@ -154,7 +154,8 @@ int main() {
         res = inital ;
         if (number != 1 )
             number = number -1 ;
-        GenerateRandom(inital,map,res,number) ;
+
+        GenerateRandom(inital,map,res,number  ) ;
         cout << "..."  ;
         for (  int i = 0 ; i < res.size() ; i++  )
             cout << res[i] << " " ;
